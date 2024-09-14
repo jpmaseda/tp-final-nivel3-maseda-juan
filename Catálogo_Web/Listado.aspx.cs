@@ -1,4 +1,5 @@
-﻿using negocio;
+﻿using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,22 +35,94 @@ namespace Catálogo_Web
         }
         protected void txtFiltrar_TextChanged(object sender, EventArgs e)
         {
-
+            List<Articulo> lista = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Nombre.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper()) || x.Marca.Descripcion.ToUpper().Contains(txtFiltrar.Text.ToUpper()));
+            if (txtFiltrar.Text == "")
+                dgvArticulos.PageSize = 5;
+            else
+                dgvArticulos.PageSize = 20;
+            dgvArticulos.DataSource = lista;
+            dgvArticulos.DataBind();
         }
 
         protected void btnLimpiar_Click(object sender, EventArgs e)
         {
-
+            Session["listaFiltrada"] = null;
+            dgvArticulos.PageSize = 5;
+            dgvArticulos.DataSource = Session["listaArticulos"];
+            dgvArticulos.DataBind();
+            txtFiltrar.Text = "";
+            txtFiltroAvanzado.Text = "";
+            ddlCampo.Text = "Precio";
+            ddlCriterio.Items.Clear();
+            ddlCriterio.Items.Add("Mayor a");
+            ddlCriterio.Items.Add("Menor a");
+            ddlCriterio.Items.Add("Es");
+            ddlCriterio.SelectedIndex = 0;
+            //ddlEstado.Text = "Todos";
+            lblAdvertencia.Text = "";
         }
 
         protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            ddlCriterio.Items.Clear();
+            switch (ddlCampo.SelectedItem.ToString())
+            {
+                case "Marca":
+                    ddlCriterio.DataSource = (List<Marca>)Session["listaMarcas"];
+                    ddlCriterio.DataBind();
+                    break;
+                case "Categoría":
+                    ddlCriterio.DataSource = (List<Categoria>)Session["listaCategarias"];
+                    ddlCriterio.DataBind();
+                    break;
+                case "Precio":
+                    ddlCriterio.Items.Add("Mayor a");
+                    ddlCriterio.Items.Add("Menor a");
+                    ddlCriterio.Items.Add("Es");
+                    break;
+                case "Nombre":
+                    ddlCriterio.Items.Add("Comienza con");
+                    ddlCriterio.Items.Add("Termina con");
+                    ddlCriterio.Items.Add("Es");
+                    break;
+            }            
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-
+            dgvArticulos.PageSize = 5;
+            lblAdvertencia.Text = "";
+            if (ddlCampo.Text == "Precio")
+            {
+                if (!int.TryParse(txtFiltroAvanzado.Text, out int result))
+                {
+                    lblAdvertencia.Text = "El filtro debe contener números.";
+                    return;
+                }
+                //else if (int.Parse(txtFiltroAvanzado.Text) >= 2079)
+                //{
+                //    lblAdvertencia.Text = "El año debe ser menor al 2079.";
+                //    return;
+                //}
+                //else if (int.Parse(txtFiltroAvanzado.Text) <= 1900)
+                //{
+                //    lblAdvertencia.Text = "El año debe ser mayor al 1900.";
+                //    return;
+                //}
+            }
+            try
+            {
+                ArticulosNegocio negocio = new ArticulosNegocio();
+                List<Articulo> lista = (List<Articulo>)negocio.filtrar(ddlCampo.Text, ddlCriterio.Text, txtFiltroAvanzado.Text);
+                Session.Add("listaFiltrada", lista);
+                dgvArticulos.DataSource = lista;
+                dgvArticulos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)

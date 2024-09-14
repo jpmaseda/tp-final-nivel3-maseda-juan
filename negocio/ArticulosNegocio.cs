@@ -12,7 +12,7 @@ namespace negocio
     {
         AccesoDatos datos = new AccesoDatos();
         List<Articulo> lista = new List<Articulo>();
-        string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca AND C.Id = A.IdCategoria AND A.Codigo != '-1' ";
+        string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca AND C.Id = A.IdCategoria";
 
         public List<Articulo> listar()
         {
@@ -202,7 +202,6 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-
         public void habilitar(int id)
         {
             try
@@ -219,6 +218,49 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
+        }
+        public void agregarFavoritos(int usuario, int articulo)
+        {
+            try
+            {
+                datos.setearConsulta("INSERT into FAVORITOS (IdUser, IdArticulo) SELECT @IdUser, @IdArticulo WHERE NOT EXISTS (SELECT 1 FROM FAVORITOS F WHERE F.IdUser = @IdUser AND F.IdArticulo = @IdArticulo)");
+                datos.setearParametro("@IdUser", usuario);
+                datos.setearParametro("@IdArticulo", articulo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }            
+        }
+        public void eliminarFavoritos(int idUser, int idArticulo)
+        {
+            try
+            {
+                datos.setearConsulta("DELETE from FAVORITOS where IdUser = @IdUser AND IdArticulo = @IdArticulo");
+                datos.setearParametro("@IdUser", idUser);
+                datos.setearParametro("@IdArticulo", idArticulo);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Articulo> listarFavoritos(int idUser)
+        {
+            consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F Where M.Id = A.IdMarca AND C.Id = A.IdCategoria AND F.IdArticulo = A.Id AND F.IdUser = @IdUser";            
+            datos.setearParametro("@IdUser", idUser);
+            listar();
+            return lista;
         }
     }
 }

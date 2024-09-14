@@ -13,7 +13,7 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label class="form-label">Filtrar</label>
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltrar" AutoPostBack="true" OnTextChanged="txtFiltrar_TextChanged" />
+                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltrar" AutoPostBack="true" placeholder="Filtra por Nombre, Marca o Descripción" OnTextChanged="txtFiltrar_TextChanged" />
                     </div>
                 </div>
                 <div class="col-3">
@@ -37,7 +37,8 @@
                         <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
                             <asp:ListItem Text="Marca" />
                             <asp:ListItem Text="Categoría" />
-                            <asp:ListItem Text="Precio" />
+                            <asp:ListItem Text="Nombre" />
+                            <asp:ListItem Text="Precio" selected="true"/>
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -45,9 +46,9 @@
                     <div class="mb-3">
                         <label class="form-label">Criterio</label>
                         <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCriterio">
-                            <asp:ListItem Text="Comienza con" />
-                            <asp:ListItem Text="Termina con" />
-                            <asp:ListItem Text="Contiene" />
+                            <asp:ListItem Text="Mayor a" />
+                            <asp:ListItem Text="Menor a" />
+                            <asp:ListItem Text="Es" />
                         </asp:DropDownList>
                     </div>
                 </div>
@@ -57,7 +58,7 @@
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroAvanzado" />
                     </div>
                 </div>
-                <div class="col-3">
+                <%--<div class="col-3">
                     <div class="mb-3">
                         <label class="form-label">Estado</label>
                         <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
@@ -66,10 +67,10 @@
                             <asp:ListItem Text="Todos" Selected="True" />
                         </asp:DropDownList>
                     </div>
-                </div>
+                </div>--%>
             </div>
             <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
-            <asp:Label ID="lblFecha" CssClass="text-dark bg-warning" runat="server" />
+            <asp:Label ID="lblAdvertencia" CssClass="text-dark bg-warning" runat="server" />
             <br />
             <%} %>
             <br />
@@ -82,8 +83,8 @@
                     <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                     <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
                     <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />
-                    <asp:CheckBoxField HeaderText="Favorito"  />
-                    <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="&#128221" ControlStyle-Font-Underline="false" />
+                    <asp:CheckBoxField HeaderText="Favoritos"  />
+                    <asp:CommandField HeaderText="Detalles" ShowSelectButton="true" SelectText="&#128221" ControlStyle-Font-Underline="false" />
                 </Columns>
                 <PagerSettings Mode="Numeric"
                     Position="Bottom" />
