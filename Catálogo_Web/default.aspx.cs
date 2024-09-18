@@ -20,6 +20,7 @@ namespace Catálogo_Web
                 {
                     ArticulosNegocio negocio = new ArticulosNegocio();
                     ListaArticulos = negocio.listar();
+                    Session.Add("listaArticulos", ListaArticulos);
                     repArticulos.DataSource = ListaArticulos;
                     repArticulos.DataBind();
                 }

@@ -94,21 +94,11 @@ namespace Catálogo_Web
             lblAdvertencia.Text = "";
             if (ddlCampo.Text == "Precio")
             {
-                if (!int.TryParse(txtFiltroAvanzado.Text, out int result))
+                if (!decimal.TryParse(txtFiltroAvanzado.Text, out decimal result))
                 {
                     lblAdvertencia.Text = "El filtro debe contener números.";
                     return;
                 }
-                //else if (int.Parse(txtFiltroAvanzado.Text) >= 2079)
-                //{
-                //    lblAdvertencia.Text = "El año debe ser menor al 2079.";
-                //    return;
-                //}
-                //else if (int.Parse(txtFiltroAvanzado.Text) <= 1900)
-                //{
-                //    lblAdvertencia.Text = "El año debe ser mayor al 1900.";
-                //    return;
-                //}
             }
             try
             {

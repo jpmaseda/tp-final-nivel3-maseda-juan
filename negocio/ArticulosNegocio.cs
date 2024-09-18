@@ -12,7 +12,7 @@ namespace negocio
     {
         AccesoDatos datos = new AccesoDatos();
         List<Articulo> lista = new List<Articulo>();
-        string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca AND C.Id = A.IdCategoria";
+        string consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M Where M.Id = A.IdMarca AND C.Id = A.IdCategoria ";
 
         public List<Articulo> listar()
         {
@@ -93,7 +93,10 @@ namespace negocio
                         break;
                     case "Menor a":
                         consulta += "AND A.Precio < '" + filtro + "'";
-                        break;                        
+                        break;
+                    default:
+                        consulta += "AND a.Precio = '" + filtro + "'";
+                        break;
                 }
             }
             else if (campo == "Nombre")
