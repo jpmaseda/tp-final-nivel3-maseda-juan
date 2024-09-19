@@ -11,17 +11,17 @@ namespace Catálogo_Web
 {
 
 
-    public partial class Login
+    public partial class Registro
     {
 
         /// <summary>
-        /// txtUsuario control.
+        /// txtEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUsuario;
+        protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
         /// txtPass control.
@@ -33,12 +33,12 @@ namespace Catálogo_Web
         protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
-        /// btnIngresar control.
+        /// btnRegistro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button btnRegistro;
     }
 }

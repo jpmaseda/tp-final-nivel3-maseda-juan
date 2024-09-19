@@ -46,7 +46,7 @@ namespace Catálogo_Web
             try
             {
                 ArticulosNegocio negocio = new ArticulosNegocio();
-                negocio.agregarFavoritos(1, fav);
+                negocio.agregarFavoritos(((Usuario)Session["usuario"]).Id, fav);
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Artículo agregado a favoritos.')", true);
             }
             catch (Exception ex)

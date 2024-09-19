@@ -41,6 +41,20 @@
                     </ul>
                 </div>
             </div>
+            <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                { %>
+            <div class="container-fluid justify-content-end">
+                <asp:Button ID="btnCerrarSesion" CssClass="btn btn-outline-warning me-2" runat="server" Text="Cerrar sesión" OnClick="btnCerrarSesion_Click" />
+                <asp:Image ID="imgPerfil" Style="height: 40px; width: 40px; border-radius: 50%" runat="server" />
+            </div>
+            <%}
+                else
+                { %>
+            <div class="container-fluid justify-content-end">
+                <a class="btn btn-success me-2" href="Login.aspx">Login</a>
+                <a class="btn btn-outline-primary me-2" href="Registro.aspx">Registrarse</a>
+            </div>
+            <%} %>
         </nav>
         <div class="container">
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

@@ -21,8 +21,8 @@ namespace Catálogo_Web
                     MarcaNegocio marcaNegocio = new MarcaNegocio();
                     CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
                     Session.Add("listaArticulos", negocio.listar());
-                    Session.Add("listaMarcas", marcaNegocio.listar());
-                    Session.Add("listaCategarias", categoriaNegocio.listar());
+                    //Session.Add("listaMarcas", marcaNegocio.listar());
+                   // Session.Add("listaCategarias", categoriaNegocio.listar());
                     dgvArticulos.DataSource = Session["listaArticulos"];
                     dgvArticulos.DataBind();
                 }
