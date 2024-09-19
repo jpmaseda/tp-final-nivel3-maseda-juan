@@ -18,12 +18,8 @@ namespace Catálogo_Web
                 try
                 {
                     ArticulosNegocio negocio = new ArticulosNegocio();
-                    //MarcaNegocio marcaNegocio = new MarcaNegocio();
-                    //CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
                     if (Session["usuario"] != null)
                         Session.Add("listaFav", negocio.listarFavoritos(((Usuario)Session["usuario"]).Id));
-                    //Session.Add("listaMarcas", marcaNegocio.listar());
-                    //Session.Add("listaCategarias", categoriaNegocio.listar());
                     dgvFavoritos.DataSource = Session["listaFav"];
                     dgvFavoritos.DataBind();
                 }
