@@ -44,7 +44,7 @@
                 <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
             <div class="mb-3">
-                <a class="form-control-color" href='javascript:history.go(-1)'>Volver atrás</a>
+                <a class="form-control-color" href='javascript:history.go(-1)'>Volver</a>
                 <%--<asp:Button ID="btnInactivar" OnClick="btnInactivar_Click" CssClass="btn btn-outline-warning" runat="server" Text="Inactivar" />--%>
             </div>
         </div>
