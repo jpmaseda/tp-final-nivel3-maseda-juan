@@ -10,7 +10,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager runat="server" />
-    <hr />
+    <br />
+    <h1>Catálogo de artículos</h1>
+    <br />
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <div class="row row-cols-1 row-cols-md-4 g-4">

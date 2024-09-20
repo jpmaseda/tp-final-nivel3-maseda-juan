@@ -3,9 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
         .validacion {
-            color: darkred;
-            font-size: 15px;
-            font: bold;
+            color:crimson;
+            font-size: 18px;
+            font-weight: bold;
         }
     </style>
 </asp:Content>

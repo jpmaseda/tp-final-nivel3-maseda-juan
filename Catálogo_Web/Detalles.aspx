@@ -40,12 +40,11 @@
                 <asp:Label ID="lblErrorFormato" ForeColor="Red" runat="server"></asp:Label>
             </div>
             <div class="mb-3">
-                <label for="ddlCategoria" class="form-label">Edición</label>
+                <label for="ddlCategoria" class="form-label">Categoría</label>
                 <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
             </div>
             <div class="mb-3">
-                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
-                <a class="form-control-color" href='javascript:history.go(-1)'>Cancelar</a>
+                <a class="form-control-color" href='javascript:history.go(-1)'>Volver atrás</a>
                 <%--<asp:Button ID="btnInactivar" OnClick="btnInactivar_Click" CssClass="btn btn-outline-warning" runat="server" Text="Inactivar" />--%>
             </div>
         </div>
@@ -53,11 +52,11 @@
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
                     <div class="mb-3">
-                        <label for="txtUrlImagen" class="form-label">Imagen de tapa</label>
+                        <label for="txtUrlImagen" class="form-label">Imagen del artículo</label>
                         <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" type="url" placeholder="https://ejemplo.com" pattern="https://.*" Class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <asp:Image ID="imgTapa" CssClass="img-thumbnail img-fluid imagen" ImageUrl="/images/img_placeholder.png" runat="server" Width="450px" />
+                        <asp:Image ID="imgArticulo" CssClass="img-thumbnail img-fluid imagen" ImageUrl="/images/img_placeholder.png" runat="server" Width="450px" />
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -67,9 +66,13 @@
         <div class="col-6">
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
+                    <%if (negocio.Seguridad.esAdmin(Session["usuario"]))
+                        {%>
                     <div class="mb-3">
+                        <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
                         <asp:Button ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-outline-danger" Text="Eliminar" runat="server" />
                     </div>
+                    <%} %>
                     <%if (CheckConfirmar)
                         {%>
                     <div class="form-check">

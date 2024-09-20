@@ -20,9 +20,13 @@ namespace Catálogo_Web
             lblAdvertencia.Text = "El precio debe contener números enteros o decimales con '" + decimalSeparator + "' para separar decimales y '" + groupSeparator + "' para separa grupos de mil.";
             CheckConfirmar = false;
             btnEliminar.Enabled = false;
+            btnAceptar.Enabled = false;
             //btnInactivar.Enabled = false;
-            if (txtId.Text != "")
-                btnEliminar.Enabled = true;
+            //if (txtId.Text != "")
+            //    btnEliminar.Enabled = true;
+
+
+
             try
             {
                 if (!IsPostBack)
@@ -49,7 +53,6 @@ namespace Catálogo_Web
             if (Session["Id"] != null)
             {
                 btnAceptar.Text = "Modificar";
-                btnEliminar.Enabled = true;
                 //btnInactivar.Enabled = true;
                 List<Articulo> temporal = (List<Articulo>)Session["listaArticulos"];
                 int id = int.Parse(Session["Id"].ToString());
@@ -63,10 +66,21 @@ namespace Catálogo_Web
                 txtUrlImagen.Text = seleccionado.urlImagen.ToString();
                 ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                 ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-                imgTapa.ImageUrl = txtUrlImagen.Text;
+                if (txtUrlImagen.Text == "")
+                    imgArticulo.ImageUrl = "/images/img_placeholder.png";
+                else
+                    imgArticulo.ImageUrl = txtUrlImagen.Text;
                 //if (seleccionado.Activo == false)
                 //    btnInactivar.Text = "Reactivar";
                 Session["Id"] = null;
+            }
+            if (Seguridad.esAdmin(Session["usuario"]))
+            {
+                if (txtId.Text == "")
+                    btnEliminar.Enabled = false;
+                else
+                    btnEliminar.Enabled = true;
+                btnAceptar.Enabled = true;
             }
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -108,7 +122,7 @@ namespace Catálogo_Web
         }
         protected void txtUrlImagen_TextChanged(object sender, EventArgs e)
         {
-            imgTapa.ImageUrl = txtUrlImagen.Text;
+            imgArticulo.ImageUrl = txtUrlImagen.Text;
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

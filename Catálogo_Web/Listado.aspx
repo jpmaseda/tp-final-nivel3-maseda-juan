@@ -82,8 +82,7 @@
                     <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
                     <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                     <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
-                    <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />
-                    <asp:CheckBoxField HeaderText="Favoritos"  />
+                    <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />                   
                     <asp:CommandField HeaderText="Detalles" ShowSelectButton="true" SelectText="&#128221" ControlStyle-Font-Underline="false" />
                 </Columns>
                 <PagerSettings Mode="Numeric"

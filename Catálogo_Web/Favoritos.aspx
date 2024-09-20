@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <br />
+    <h1>Mi lista de favoritos</h1>
+    <br />
     <asp:GridView ID="dgvFavoritos" CssClass="table table-striped table-hover" DataKeyNames="Id" runat="server" OnRowCommand="dgvFavoritos_RowCommand" AutoGenerateColumns="false" AllowPaging="true">
         <Columns>
             <asp:BoundField HeaderText="Código" DataField="Codigo" />
@@ -11,8 +14,8 @@
             <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
             <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" DataFormatString="{0:C}" />
-            <asp:ButtonField HeaderText="Detalles" ControlStyle-CssClass="btn btn-outline-primary" CommandName="detalles" buttontype="Button" Text="Ver" />       
-            <asp:ButtonField HeaderText="Favoritos" CommandName="quitarFav" ControlStyle-CssClass="btn btn-outline-warning" buttontype="Button" Text="Quitar" />       
+            <asp:ButtonField HeaderText="Detalles" ControlStyle-CssClass="btn btn-outline-success" CommandName="detalles" ButtonType="Button" Text="Ver" />
+            <asp:ButtonField HeaderText="Favoritos" CommandName="quitarFav" ControlStyle-CssClass="btn btn-outline-danger" ButtonType="Button" Text="Quitar" />
         </Columns>
         <PagerSettings Mode="Numeric"
             Position="Bottom" />

@@ -20,7 +20,7 @@ namespace Catálogo_Web
             }
 
             if (Seguridad.sesionActiva(Session["usuario"]) && ((Usuario)Session["usuario"]).ImagenPerfil != null)
-                imgPerfil.ImageUrl = "~/images/" + ((Usuario)Session["usuario"]).ImagenPerfil;
+                imgPerfil.ImageUrl = "~/images/perfiles/" + ((Usuario)Session["usuario"]).ImagenPerfil;
             else
                 imgPerfil.ImageUrl = "~/images/circle.png";
         }

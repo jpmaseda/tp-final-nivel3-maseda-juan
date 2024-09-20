@@ -18,6 +18,8 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
+                    { %>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -26,6 +28,8 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Favoritos.aspx">Favoritos</a>
                         </li>
+                        <%if (negocio.Seguridad.esAdmin(Session["usuario"]))
+                            { %>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin
                             </a>
@@ -38,14 +42,19 @@
                                 <li><a class="dropdown-item" href="Listado.aspx">Eliminar artículos</a></li>
                             </ul>
                         </li>
+                        <% } %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Perfil.aspx">Mi Perfil</a>
+                        </li>
                     </ul>
                 </div>
+                <%} %>
             </div>
             <%if (negocio.Seguridad.sesionActiva(Session["usuario"]))
                 { %>
             <div class="container-fluid justify-content-end">
                 <asp:Button ID="btnCerrarSesion" CssClass="btn btn-outline-warning me-2" runat="server" Text="Cerrar sesión" OnClick="btnCerrarSesion_Click" />
-                <asp:Image ID="imgPerfil" Style="height: 40px; width: 40px; border-radius: 50%" runat="server" />
+                <asp:Image ID="imgPerfil" Style="height: 45px; width: 45px; border-radius: 50%" runat="server" />
             </div>
             <%}
                 else
