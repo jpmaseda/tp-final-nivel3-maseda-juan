@@ -35,9 +35,9 @@
             </div>
             <div class="mb-3">
                 <label for="txtPrecio" class="form-label">Precio</label>
-                <asp:TextBox ID="txtPrecio" Class="form-control" runat="server"></asp:TextBox>
-                <asp:Label ID="lblAdvertencia" ForeColor="WhiteSmoke" runat="server"></asp:Label>
-                <asp:Label ID="lblErrorFormato" ForeColor="Red" runat="server"></asp:Label>
+                <asp:TextBox ID="txtPrecio" Class="form-control" REQUIRED="" runat="server"></asp:TextBox>
+                <asp:Label ID="lblAdvertencia" ForeColor="WhiteSmoke" runat="server"></asp:Label>                
+                <asp:Label ID="lblErrorFormato" ForeColor="Red" Text="" runat="server"></asp:Label>
             </div>
             <div class="mb-3">
                 <label for="ddlCategoria" class="form-label">Categoría</label>
@@ -56,7 +56,7 @@
                         <asp:TextBox ID="txtUrlImagen" OnTextChanged="txtUrlImagen_TextChanged" AutoPostBack="true" type="url" placeholder="https://ejemplo.com" pattern="https://.*" Class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="mb-3">
-                        <asp:Image ID="imgArticulo" CssClass="img-thumbnail img-fluid imagen" ImageUrl="/images/img_placeholder.png" runat="server" Width="450px" />
+                        <asp:Image ID="imgArticulo" onerror="this.onerror=null; this.src='/images/img_placeholder.png'" CssClass="img-thumbnail img-fluid imagen" ImageUrl="/images/img_placeholder.png" runat="server" Width="450px" />
                     </div>
                 </ContentTemplate>
             </asp:UpdatePanel>
@@ -64,15 +64,15 @@
     </div>
     <div class="row">
         <div class="col-6">
+            <%if (negocio.Seguridad.esAdmin(Session["usuario"]))
+                {%>
+            <div class="mb-3">
+                <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
+                <asp:Button ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-outline-danger" Text="Eliminar" runat="server" />
+            </div>
+            <%} %>
             <asp:UpdatePanel runat="server">
                 <ContentTemplate>
-                    <%if (negocio.Seguridad.esAdmin(Session["usuario"]))
-                        {%>
-                    <div class="mb-3">
-                        <asp:Button ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-outline-primary" runat="server" Text="Aceptar" />
-                        <asp:Button ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-outline-danger" Text="Eliminar" runat="server" />
-                    </div>
-                    <%} %>
                     <%if (CheckConfirmar)
                         {%>
                     <div class="form-check">
