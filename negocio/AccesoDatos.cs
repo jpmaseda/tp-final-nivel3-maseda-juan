@@ -19,7 +19,12 @@ namespace negocio
         }
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server =.\\SQLEXPRESS; database = CATALOGO_WEB_DB; integrated security = true");
+            //conexion = new SqlConnection("server =.\\SQLEXPRESS; database = CATALOGO_WEB_DB; integrated security = true");
+            
+            //Al mover la conexion a webconfig/appsettings hay que sacar una \
+            
+            string db = ConfigurationManager.AppSettings["conexionDB"];
+            conexion = new SqlConnection(db);
             comando = new SqlCommand();
         }
 
