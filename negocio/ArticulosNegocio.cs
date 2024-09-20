@@ -84,42 +84,53 @@ namespace negocio
         }
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
-            if (campo == "Precio")
+            try
             {
-                switch (criterio)
+                if (campo == "Precio")
                 {
-                    case "Mayor a":
-                        consulta += "AND A.Precio > '" + filtro + "'";
-                        break;
-                    case "Menor a":
-                        consulta += "AND A.Precio < '" + filtro + "'";
-                        break;
-                    default:
-                        consulta += "AND a.Precio = '" + filtro + "'";
-                        break;
+                    switch (criterio)
+                    {
+                        case "Mayor a":
+                            consulta += "AND A.Precio > '" + filtro + "'";
+                            break;
+                        case "Menor a":
+                            consulta += "AND A.Precio < '" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "AND a.Precio = '" + filtro + "'";
+                            break;
+                    }
                 }
+                else if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "AND A.Nombre like '" + filtro + "%'";
+                            break;
+                        case "Termina con":
+                            consulta += "AND A.Nombre like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "AND A.Nombre like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                if (campo == "Marca")
+                    consulta += "AND M.Descripcion = '" + criterio + "'";
+                if (campo == "Categoría")
+                    consulta += "AND C.Descripcion = '" + criterio + "'";
+                listar();
+                return lista;
             }
-            else if (campo == "Nombre")
+            catch (Exception ex)
             {
-                switch (criterio)
-                {
-                    case "Comienza con":
-                        consulta += "AND A.Nombre like '" + filtro + "%'";
-                        break;
-                    case "Termina con":
-                        consulta += "AND A.Nombre like '%" + filtro + "'";
-                        break;
-                    default:
-                        consulta += "AND A.Nombre like '%" + filtro + "%'";
-                        break;
-                }
-            }            
-            if (campo == "Marca")            
-                consulta += "AND M.Descripcion = '" + criterio + "'";            
-            if (campo == "Categoría")
-                consulta += "AND C.Descripcion = '" + criterio + "'";
-            listar();
-            return lista;
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
 
         public void eliminarLogico(int id)
@@ -238,7 +249,7 @@ namespace negocio
             finally
             {
                 datos.cerrarConexion();
-            }            
+            }
         }
         public void eliminarFavoritos(int idUser, int idArticulo)
         {
@@ -260,10 +271,25 @@ namespace negocio
         }
         public List<Articulo> listarFavoritos(int idUser)
         {
-            consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F Where M.Id = A.IdMarca AND C.Id = A.IdCategoria AND F.IdArticulo = A.Id AND F.IdUser = @IdUser";            
-            datos.setearParametro("@IdUser", idUser);
-            listar();
-            return lista;
+            try
+            {
+                //Borrar parametros (@IdUser) para que cuando recargue la lista después de
+                //borrar un fav no se rompa por pasar un parámetro más de una vez
+                datos.borrarParametros();
+
+                consulta = "SELECT A.Id, A.Codigo, A.Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, A.ImagenUrl, A.Precio, M.Id IdMarca, C.Id IdCategoria from ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F Where M.Id = A.IdMarca AND C.Id = A.IdCategoria AND F.IdArticulo = A.Id AND F.IdUser = @IdUser";
+                datos.setearParametro("@IdUser", idUser);
+                listar();
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

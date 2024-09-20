@@ -32,13 +32,13 @@ namespace Catálogo_Web
                 }
                 else
                 {
-                    Session.Add("error", "Email o pass incorrectas");
+                    Session.Add("error", "Email o contraseña incorrectas");
                     Response.Redirect("Error.aspx", false);
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
+                Session.Add("error", ex.Message.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }

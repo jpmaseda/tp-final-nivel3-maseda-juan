@@ -81,5 +81,9 @@ namespace negocio
                 throw ex;
             }
         }
+        public void borrarParametros()
+        {
+            comando.Parameters.Clear();
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Catálogo_Web
                 }
                 catch (Exception ex)
                 {
-                    Session.Add("error", ex.ToString());
+                    Session.Add("error", ex.Message.ToString());
                     Response.Redirect("Error.aspx", false);
                 }
             }
@@ -51,7 +51,7 @@ namespace Catálogo_Web
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
+                Session.Add("error", ex.Message.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }

@@ -31,15 +31,10 @@ namespace Catálogo_Web
                 usuario.Id = negocio.registrarUsuario(usuario);
                 Session.Add("usuario", usuario);
                 Response.Redirect("default.aspx", false);
-                //if (negocio.logear(usuario))
-                //{
-                //    Session.Add("usuario", usuario);
-                //    Response.Redirect("MenuLogin.aspx", false);
-                //}
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
+                Session.Add("error", ex.Message.ToString());
                 Response.Redirect("Error.aspx", false);
             }
         }
