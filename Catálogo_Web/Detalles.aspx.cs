@@ -18,14 +18,12 @@ namespace Catálogo_Web
             string decimalSeparator = ci.NumberFormat.CurrencyDecimalSeparator;
             string groupSeparator = ci.NumberFormat.CurrencyGroupSeparator;
             lblAdvertencia.Text = "El precio debe contener números enteros o decimales con '" + decimalSeparator + "' para separar decimales y '" + groupSeparator + "' para separa grupos de mil.";
-
             CheckConfirmar = false;
             btnEliminar.Enabled = false;
             btnAceptar.Enabled = false;
             //btnInactivar.Enabled = false;
             //if (txtId.Text != "")
             //    btnEliminar.Enabled = true;
-
             try
             {
                 if (!IsPostBack)
@@ -157,6 +155,7 @@ namespace Catálogo_Web
                 txtDescripcion.ReadOnly = true;
                 ddlCategoria.Enabled = false;
                 ddlMarca.Enabled = false;
+                lblAdvertencia.Text = "";
             }
         }
     }
