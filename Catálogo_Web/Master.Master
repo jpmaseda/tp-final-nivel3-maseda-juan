@@ -54,7 +54,9 @@
                 { %>
             <div class="container-fluid justify-content-end">
                 <asp:Button ID="btnCerrarSesion" CssClass="btn btn-outline-warning me-2" runat="server" Text="Cerrar sesión" OnClick="btnCerrarSesion_Click" />
-                <asp:Image ID="imgPerfil" Style="height: 45px; width: 45px; border-radius: 50%" runat="server" />
+                <asp:HyperLink NavigateUrl="Perfil.aspx" runat="server">
+                    <asp:Image ID="imgPerfil" Style="height: 45px; width: 45px; border-radius: 50%" runat="server" />
+                </asp:HyperLink>
             </div>
             <%}
                 else

@@ -15,6 +15,24 @@ namespace Catálogo_Web
     {
 
         /// <summary>
+        /// btnGrilla control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnGrilla;
+
+        /// <summary>
+        /// btnImagen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnImagen;
+
+        /// <summary>
         /// dgvFavoritos control.
         /// </summary>
         /// <remarks>
@@ -22,5 +40,14 @@ namespace Catálogo_Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvFavoritos;
+
+        /// <summary>
+        /// repFavoritos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater repFavoritos;
     }
 }
