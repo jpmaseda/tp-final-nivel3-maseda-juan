@@ -42,6 +42,7 @@ namespace Catálogo_Web
                     ddlCategoria.DataBind();
                     if (Request.QueryString["Id"] != null)
                         Session["Id"] = Request.QueryString["Id"];
+                    inhabilitarCamposNoAdmin();
                 }
             }
             catch (Exception ex)
@@ -145,6 +146,18 @@ namespace Catálogo_Web
             }
 
         }
-
+        protected void inhabilitarCamposNoAdmin()
+        {
+            if (!Seguridad.esAdmin(Session["usuario"]))
+            {
+                txtCodigo.ReadOnly = true;
+                txtNombre.ReadOnly = true;
+                txtPrecio.ReadOnly = true;
+                txtUrlImagen.ReadOnly = true;
+                txtDescripcion.ReadOnly = true;
+                ddlCategoria.Enabled = false;
+                ddlMarca.Enabled = false;
+            }
+        }
     }
 }

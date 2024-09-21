@@ -89,7 +89,7 @@ namespace Catálogo_Web
                 Response.Redirect("Error.aspx", false);
             }
         }
-        private void vincularLista()
+        protected void vincularLista()
         {
             ArticulosNegocio negocio = new ArticulosNegocio();
             if (Session["usuario"] != null)
